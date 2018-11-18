@@ -21,17 +21,17 @@ class SimpleRouter extends RouteBuilder{
     void configure() throws Exception {
 
         from('direct:test-input')
-            .log(DEBUG, log,'Received message on test-input')
+            .log(INFO, log,'Received message on test-input')
             .bean(simpleInputService)
             .choice()
             .when(header('SEND_OUT').isNotNull())
-                .log(DEBUG, log,'Message is valid and will be sent to direct:test-output')
+                .log(INFO, log,'Message is valid and will be sent to direct:test-output')
                 .to('direct:test-output')
             .endChoice()
 
 
         from('direct:test-output')
-            .log(DEBUG, log, 'Received message on test-output')
+            .log(INFO, log, 'Received message on test-output')
             .bean(simpleOutputService)
             .to('log:out')
     }

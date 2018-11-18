@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service
 class SimpleOutputService {
 
     def performSomeOtherSimpleStringTask(@Body String input){
-        log.debug 'This input is the convered message body from the camel route: {}', input
+        log.info 'This input is the convered message body from the camel route: {}', input
 
         def newBody = 'Some output from the output service.'
 
-        log.debug 'The message body will now be: {}', newBody
+        log.info 'The message body will now be: {}', newBody
 
         newBody
     }

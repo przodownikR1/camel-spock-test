@@ -54,9 +54,9 @@ class SimpleRouterSpec extends Specification {
 
             mockTestOutputEndpoint.expectedCount = 0
         when:
-            producer.sendBody('direct:test-input', '')
+            producer.sendBody('direct:test-input', 'testA')
         then:
-            1 * mockSimpleInputService.performSimpleStringTask('')
+            1 * mockSimpleInputService.performSimpleStringTask('testA')
             0 * mockSimpleOutputService.performSomeOtherSimpleStringTask(_)
             mockTestOutputEndpoint.assertIsSatisfied()
     }
@@ -67,9 +67,9 @@ class SimpleRouterSpec extends Specification {
 
             mockTestOutputEndpoint.expectedCount = 1
         when:
-            producer.sendBodyAndHeaders('direct:test-input', '', ['SEND_OUT': true])
+            producer.sendBodyAndHeaders('direct:test-input', 'testB', ['SEND_OUT': true])
         then:
-            1 * mockSimpleInputService.performSimpleStringTask('')
+            1 * mockSimpleInputService.performSimpleStringTask('testB')
             1 * mockSimpleOutputService.performSomeOtherSimpleStringTask(_)
             mockTestOutputEndpoint.assertIsSatisfied()
     }
